@@ -9,7 +9,7 @@ class InputFilesDownloader {
     private val filename = "/day%02d.txt"
     private val LAST_DAY = 25
     private val path = System.getProperty("user.dir")
-    private val urlString = "https://adventofcode.com/2020/day/%d/input"
+    private val urlString = "https://adventofcode.com/2020/day/%d"
 
     fun downloadAll() {
         val toDownload = rangeOfDaysPublished().filter { notDownloadedYet(it) }
@@ -33,8 +33,9 @@ class InputFilesDownloader {
     }
 
     private fun downloadDay(i: Int) {
-        val url = URL(urlString.format(i))
-        with(url.openConnection() as HttpURLConnection) {
+        val problemUrl = urlString.format(i)
+        val inputUrl = URL(problemUrl.plus("/input"))
+        with(inputUrl.openConnection() as HttpURLConnection) {
             requestMethod = "GET"
 
             /**
@@ -45,7 +46,7 @@ class InputFilesDownloader {
              */
             setRequestProperty("cookie", "session=%s".format(cookie))
 
-            println("Downloading : $url; Response Code : $responseCode")
+            println("Downloading input for: $problemUrl\nResponse Code : $responseCode")
             val file = File(path.plus(filename.format(i)))
             file.copyInputStreamToFile(inputStream)
         }
