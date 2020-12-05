@@ -1,24 +1,22 @@
 class Day02 : AdventDay {
     override val dayNumber = this.javaClass.name.substring(3, 5).toInt()
-
+    val input = inputLines(dayNumber)
     override fun partOne(): Int {
-        return inputLines(dayNumber).count { isValidCriteriaOne(it) }
+        return input.count { isValidCriteriaOne(it) }
     }
 
     override fun partTwo(): Int {
-        return inputLines(dayNumber).count { isValidCriteriaTwo(it) }
+        return input.count { isValidCriteriaTwo(it) }
     }
 
     fun isValidCriteriaOne(fullLine: String): Boolean {
-        val entry = fullLine.split("-", " ", ": ")
-        val (min, max) = entry.subList(0, 2).map { it.toInt() }
-        val (character, pass) = entry.subList(2, 4)
-        val count = pass.count { it.toString() == character }
+        val line = fullLine.split(" ")
+        val min = line[0].split("-")[0].toInt() - 1
+        val max = line[0].split("-")[1].toInt() - 1
+        val character = line[1][0].toChar()
+        val pass = line[2]
+        val count = pass.count { it == character }
         return (min..max).contains(count)
-    }
-
-    class Cosa {
-
     }
 
     data class PassEntry(val min: String, val max: String, val character: String, val pass: String)
