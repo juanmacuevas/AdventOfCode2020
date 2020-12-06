@@ -4,20 +4,20 @@ class Day06 : AdventDay {
     private val groups = inputLines(dayNumber).splitOn("")
 
     override fun partOne(): Int {
-        return groups.map { group ->
-            group.map { line ->
-                line.toSet()
-            }.flatten().toSet().size
+        return groups.map {
+            it.map { answers -> answers.toSet() }
+                .flatten() //puts all answers in group together
+                .toSet() //removes duplicates
+                .size
         }.sum()
     }
 
     override fun partTwo(): Int {
-        return groups.map { group ->
-            group.map { line ->
-                line.toSet()
-            }.reduce { eachLine, otherLine ->
-                eachLine.intersect(otherLine)
-            }.size
+        return groups.map {
+            it.map { answers -> answers.toSet() }
+                .reduce { firstAnswers, otherAnswers ->
+                    firstAnswers.intersect(otherAnswers) }
+                .size
         }.sum()
     }
 
