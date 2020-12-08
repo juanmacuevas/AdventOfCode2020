@@ -11,6 +11,7 @@ fun main() {
         Day05(),
         Day06(),
         Day07(),
+        Day08(),
     )
     adventDays.forEach {
         println("# Day %02d".format(it.dayNumber))
