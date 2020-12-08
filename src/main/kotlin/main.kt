@@ -32,3 +32,13 @@ fun <T> List<T>.toPair(): Pair<T, T>? {
     if (size < 2) return null
     return Pair(this[0], this[1])
 }
+
+fun <E> List<E>.splitOn(separator: String): List<List<E>> {
+    var all = mutableListOf<MutableList<E>>().apply { add(mutableListOf()) }
+    return this.fold(all, { acc, item ->
+        if ((item == separator) && acc.last().isNotEmpty()) {
+            acc.add(mutableListOf())
+        }
+        acc.apply { if (item != separator) last().add(item) }
+    })
+}
