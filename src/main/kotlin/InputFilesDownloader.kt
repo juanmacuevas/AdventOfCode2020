@@ -11,16 +11,17 @@ class InputFilesDownloader {
     private val path = System.getProperty("user.dir")
     private val urlString = "https://adventofcode.com/2020/day/%d"
 
-    fun downloadAll() {
+    fun downloadAll(): List<Int> {
         val toDownload = rangeOfDaysPublished().filter { notDownloadedYet(it) }
         if (toDownload.isEmpty())
             println("Nothing to download")
         toDownload.forEach {
             downloadDay(it)
         }
+        return toDownload
     }
 
-    private fun rangeOfDaysPublished(): IntRange {
+    fun rangeOfDaysPublished(): IntRange {
         val competitionStarted = LocalDate.of(2020, 12, 1)
         val today = LocalDate.now()
         var daysSinceStarted = Period.between(competitionStarted, today).days + 1

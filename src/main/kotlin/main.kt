@@ -1,29 +1,22 @@
 import kotlin.system.measureTimeMillis
 
 fun main() {
+
     InputFilesDownloader().downloadAll()
 
-    val adventDays = listOf<AdventDay>(
-        Day01(),
-        Day02(),
-        Day03(),
-        Day04(),
-        Day05(),
-        Day06(),
-        Day07(),
-        Day08(),
-        Day09(),
-        Day10(),
-    )
-    adventDays.forEach {
-        println("# Day %02d".format(it.dayNumber))
-        var result: Number
-        var time: Long
-        time = measureTimeMillis { result = it.partOne() }
-        println("\t1. %d (%dms)".format(result, time))
-        time = measureTimeMillis { result = it.partTwo() }
-        println("\t2. %d (%dms)".format(result, time))
-    }
+    InputFilesDownloader().rangeOfDaysPublished()
+        .map { "Day%02d".format(it) }
+        .map { Class.forName(it)?.newInstance() }
+        .forEach {
+            it as AdventDay
+            println("# Day %02d".format(it.dayNumber))
+            var result: Number
+            var time: Long
+            time = measureTimeMillis { result = it.partOne() }
+            println("\t1. %d (%dms)".format(result, time))
+            time = measureTimeMillis { result = it.partTwo() }
+            println("\t2. %d (%dms)".format(result, time))
+        }
 
 }
 
