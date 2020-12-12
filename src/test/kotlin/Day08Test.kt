@@ -1,5 +1,6 @@
-import org.junit.Test
-import kotlin.test.assertTrue
+import jdk.nashorn.internal.objects.NativeRegExp.test
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 
 internal class Day08Test {
 

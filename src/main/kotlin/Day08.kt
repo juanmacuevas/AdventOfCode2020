@@ -1,8 +1,6 @@
 class Day08 : AdventDay {
     override val dayNumber = this.javaClass.name.takeLast(2).toInt()
 
-//    private val groups = inputLines(dayNumber).splitOn("")
-
     override fun partOne(): Int {
         val program = inputLines(dayNumber).mapIndexed { i, it ->
             val (inst, value) = it.split(" ")

@@ -1,6 +1,4 @@
-import org.junit.Test
-import kotlin.test.assertFalse
-import kotlin.test.assertTrue
+import org.junit.jupiter.api.Test
 
 internal class Day02Test{
 

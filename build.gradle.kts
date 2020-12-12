@@ -13,11 +13,11 @@ repositories {
 }
 
 dependencies {
-    testImplementation(kotlin("test-junit"))
-}
+    testImplementation("org.junit.jupiter:junit-jupiter:5.7.0")
 
-tasks.test {
-    useJUnit()
+}
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
 
 tasks.withType<KotlinCompile>() {
