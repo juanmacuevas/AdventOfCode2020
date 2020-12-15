@@ -1,6 +1,7 @@
 import java.io.File
 import java.io.InputStream
 import java.net.HttpURLConnection
+import java.net.SocketTimeoutException
 import java.net.URL
 import java.time.LocalDate
 import java.time.Period
@@ -16,7 +17,10 @@ class InputFilesDownloader {
         if (toDownload.isEmpty())
             println("Nothing to download")
         toDownload.forEach {
-            downloadDay(it)
+            try {
+                downloadDay(it)
+            }catch (e: SocketTimeoutException){
+            }
         }
         return toDownload
     }
@@ -38,6 +42,7 @@ class InputFilesDownloader {
         val inputUrl = URL(problemUrl.plus("/input"))
         with(inputUrl.openConnection() as HttpURLConnection) {
             requestMethod = "GET"
+            setConnectTimeout(2000)
 
             /**
              *  Unresolved reference: cookie

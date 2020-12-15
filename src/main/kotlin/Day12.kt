@@ -4,13 +4,13 @@ class Day12 : AdventDay {
     override val dayNumber = this.javaClass.name.takeLast(2).toInt()
     override fun partOne(): Number {
         return inputLines(dayNumber)
-            .fold(NavigatorOne(), { nav, it -> nav.update(it) })
+            .fold(NavigatorOne(), { nav, action -> nav.update(action) })
             .manhattan()
     }
 
     override fun partTwo(): Number {
         return inputLines(dayNumber)
-            .fold(NavigatorTwo(), { nav, it -> nav.update(it) })
+            .fold(NavigatorTwo(), { nav, action -> nav.update(action) })
             .manhattan()
     }
 
